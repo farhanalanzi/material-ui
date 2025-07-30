@@ -1,50 +1,64 @@
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-import { deepOrange, deepPurple } from "@mui/material/colors";
-import Checkbox from "@mui/material/Checkbox";
-import Slider from "@mui/material/Slider";
-import Chip from "@mui/material/Chip";
-import Container from '@mui/material/Container';
+import * as React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Container from "@mui/material/Container";
+import Switch from "@mui/material/Switch";
+import { orange } from "@mui/material/colors";
+import Collapse from "@mui/material/Collapse";
 
-
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+const label = { inputProps: { "aria-label": "Switch demo" } };
 
 export default function Material() {
+  const [checked, setChecked] = React.useState(true);
+
   return (
-     <Container maxWidth="sm">
-    <Stack direction="row" spacing={2} style={{ background: "gray" }}>
-      <Button
-        variant="contained"
-        style={{ background: "#009688", color: "white" }}
-        onClick={() => {
-          alert("clicked");
-        }}
-        color="primary"
-      >
-        primary
-      </Button>
-      <Button variant="contained" color="success" size="large">
-        Success
-      </Button>
-      <Button variant="outlined" color="error">
-        Error
-      </Button>
-      <Checkbox {...label} />
-      <Slider aria-label="Volume" />
+    <Container maxWidth="sm" style={{ marginTop: "200px" }}>
+      <div>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            <Typography component="span">Accordion 1</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2-content"
+            id="panel2-header"
+          >
+            <Typography component="span">Accordion 2</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Switch
+              {...label}
+              value={checked}
+              onChange={() => {
+                setChecked((prev) => !prev);
+              }}
+              defaultChecked
+            />
+          </AccordionDetails>
+        </Accordion>
+      </div>
 
-      <Stack direction="row" spacing={1}>
-        <Chip label="primary" color="primary" />
-        <Chip label="success" color="success" />
-      </Stack>
-    </Stack>
-
-    {/* // <Stack direction="row" spacing={2}>
-    //   <Avatar>H</Avatar>
-    //   <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
-    //   <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
-    // </Stack> */}
-
+      <Collapse in={checked} collapsedSize={100}>
+        <div style={{ height: "400px", background: "orange" }}>
+          <h1>Hello E</h1>
+        </div>
+      </Collapse>
     </Container>
   );
 }
